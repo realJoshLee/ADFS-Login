@@ -1,37 +1,8 @@
 <?php
-require('app/init/init-login.php');
-
-// Gets the LDAP domain domain from the address bar
-$logindomain = $_GET['ld'];
-
-if(!isset($_GET['ld'])){
-  //header('Location: adfs-domain.php');
-}
-
-// Gets the connection info from that LDAP domain
-$adfsget = $db->prepare("SELECT * FROM `remind_adfs` WHERE `logindomain` = :logindomain");
-$adfsget->execute([
-  'logindomain' => $logindomain
-]);
-$adfs = $adfsget->rowCount() ? $adfsget : [];
-
-$adfsgett = $db->prepare("SELECT * FROM `remind_adfs` WHERE `logindomain` = :logindomain");
-$adfsgett->execute([
-  'logindomain' => $logindomain
-]);
-$adfst = $adfsgett->rowCount() ? $adfsgett : [];
-
-// Sets the connection info from that LDAP domain
-foreach($adfs as $item){
-  $dbadfsUrl = $item['adfsurl'];
-  $spIdentifier = $item['spidentifier'];
-  $db_domain = $item['domain'];
-  $db_logo = $item['logo'];
-}
-
-if($adfsallow=='false'){
-  header('Location: login.php');
-}
+$dbadfsUrl = 'adfs.google.com';
+$spIdentifier = $item['spidentifier'];
+$db_domain = 'google.com';
+$db_logo = 'google.com/img.png';
 
 ?>
 
